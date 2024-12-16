@@ -18,12 +18,16 @@ const spockButtonExtended = document.querySelector(
 
 const optionsGameExtended = ["rock", "paper", "scissors", "lizard", "spock"];
 
+function capitalize(choice) {
+  if (typeof choice !== "string" || choice.length === 0) {
+    return "";
+  }
+  return choice[0].toUpperCase() + choice.slice(1);
+}
+
 function playGameExtended(playerChoice) {
   const randomIndex = Math.floor(Math.random() * optionsGameExtended.length);
   const computerChoice = optionsGameExtended[randomIndex];
-
-  const playerChoiseCapitalize =
-    String(playerChoice[0]).toUpperCase() + String(playerChoice).slice(1);
 
   let message = "";
 
@@ -41,9 +45,13 @@ function playGameExtended(playerChoice) {
     (playerChoice === "paper" && computerChoice === "spock") ||
     (playerChoice === "spock" && computerChoice === "rock")
   ) {
-    message = `Congratulations, you won! ${playerChoiseCapitalize} beats ${computerChoice}!`;
+    message = `Congratulations, you won! ${capitalize(
+      playerChoice
+    )} beats ${computerChoice}!`;
   } else {
-    message = `Sorry, the computer won! ${playerChoiseCapitalize} beats ${computerChoice}!`;
+    message = `Sorry, the computer won! ${capitalize(
+      computerChoice
+    )} beats ${playerChoice}!`;
   }
 
   if (!message) {
